@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UBS Parque Eldorado & Sistema SUS</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Estilos Customizados -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
+
+    <!-- CABEÇALHO / NAVBAR -->
+    <header class="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="voltarInicio()">
+                <div class="bg-white/10 p-2 rounded-xl backdrop-blur-sm border border-white/20">
+                    <i data-lucide="heart-handshake" class="w-6 h-6 text-blue-200"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">UBS Parque Eldorado</h1>
+                    <p class="text-xs text-blue-200">Atendimento Humanizado & Saúde Pública</p>
+                </div>
+            </div>
+
+            <!-- NAVEGAÇÃO SUPERIOR -->
+            <nav class="flex flex-wrap gap-2 text-xs font-semibold">
+                <button onclick="voltarInicio()" id="nav-inicio" class="nav-btn active">
+                    <i data-lucide="home" class="w-4 h-4"></i><span>Início</span>
+                </button>
+                <button onclick="abrirAcessoPortal()" id="nav-acesso" class="nav-btn-highlight">
+                    <i data-lucide="lock" class="w-4 h-4"></i><span>Acessar o Portal</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6 space-y-8">
+
+        <!-- TELA INICIAL PÚBLICA -->
+        <div id="visao-publica" class="space-y-8">
+            <!-- Banner Inicial -->
+            <div class="relative bg-gradient-to-r from-blue-700 to-indigo-800 text-white rounded-2xl overflow-hidden shadow-lg p-6 md:p-10 border border-blue-600/30">
+                <div class="max-w-2xl space-y-3">
+                    <span class="inline-flex items-center gap-1.5 bg-blue-500/30 text-blue-100 text-xs font-semibold px-3 py-1 rounded-full border border-blue-300/30">
+                        <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Eldorado do Sul - RS
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Cuidando da sua saúde com acolhimento e transparência</h2>
+                    <p class="text-blue-100 text-sm leading-relaxed">
+                        Bem-vindo ao portal oficial da UBS Parque Eldorado. Aqui você encontra informações claras sobre campanhas preventivas, horários de vacinação e acesso seguro aos serviços de saúde.
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-4 text-xs font-medium text-blue-200">
+                        <span class="flex items-center gap-1"><i data-lucide="clock" class="w-4 h-4 text-blue-300"></i> Seg a Sex: 07h às 19h</span>
+                        <span class="flex items-center gap-1"><i data-lucide="phone" class="w-4 h-4 text-blue-300"></i> (51) 3481-0000</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO DE CAMPANHAS DE SAÚDE (CARDS INTERATIVOS) -->
+            <section class="space-y-4">
+                <div class="border-b pb-2">
+                    <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <i data-lucide="megaphone" class="w-5 h-5 text-blue-600"></i> Campanhas de Conscientização e Prevenção
+                    </h3>
+                    <p class="text-xs text-slate-500">Clique em uma campanha para ver orientações, exames e recomendações.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div onclick="abrirCardCampanha('outubro-rosa')" class="campaign-card border-pink-200 bg-pink-50/50 hover:bg-pink-100/50 cursor-pointer transition">
+                        <div class="flex justify-between items-center text-pink-700">
+                            <span class="font-bold text-sm">Outubro Rosa</span>
+                            <i data-lucide="ribbon" class="w-5 h-5"></i>
+                        </div>
+                        <p class="text-xs text-slate-600">Prevenção e diagnóstico precoce do Câncer de Mama e Colo do Útero.</p>
+                        <span class="text-[11px] text-pink-700 font-semibold mt-auto flex items-center gap-1">Saiba mais <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i></span>
+                    </div>
+
+                    <div onclick="abrirCardCampanha('novembro-azul')" class="campaign-card border-blue-200 bg-blue-50/50 hover:bg-blue-100/50 cursor-pointer transition">
+                        <div class="flex justify-between items-center text-blue-700">
+                            <span class="font-bold text-sm">Novembro Azul</span>
+                            <i data-lucide="heart-pulse" class="w-5 h-5"></i>
+                        </div>
+                        <p class="text-xs text-slate-600">Saúde do homem e conscientização sobre a prevenção do Câncer de Próstata.</p>
+                        <span class="text-[11px] text-blue-700 font-semibold mt-auto flex items-center gap-1">Saiba mais <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i></span>
+                    </div>
+
+                    <div onclick="abrirCardCampanha('setembro-amarelo')" class="campaign-card border-amber-200 bg-amber-50/50 hover:bg-amber-100/50 cursor-pointer transition">
+                        <div class="flex justify-between items-center text-amber-700">
+                            <span class="font-bold text-sm">Setembro Amarelo</span>
+                            <i data-lucide="smile" class="w-5 h-5"></i>
+                        </div>
+                        <p class="text-xs text-slate-600">Acolhimento, valorização da vida e atenção à Saúde Mental.</p>
+                        <span class="text-[11px] text-amber-700 font-semibold mt-auto flex items-center gap-1">Saiba mais <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i></span>
+                    </div>
+
+                    <div onclick="abrirCardCampanha('abril-azul')" class="campaign-card border-cyan-200 bg-cyan-50/50 hover:bg-cyan-100/50 cursor-pointer transition">
+                        <div class="flex justify-between items-center text-cyan-700">
+                            <span class="font-bold text-sm">Abril Azul (TEA)</span>
+                            <i data-lucide="sparkles" class="w-5 h-5"></i>
+                        </div>
+                        <p class="text-xs text-slate-600">Conscientização sobre o Transtorno do Espectro Autista e inclusão.</p>
+                        <span class="text-[11px] text-cyan-700 font-semibold mt-auto flex items-center gap-1">Saiba mais <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VACINAÇÃO PÚBLICA -->
+            <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <i data-lucide="syringe" class="w-5 h-5 text-blue-600"></i> Informações sobre Vacinação
+                    </h3>
+                    <span class="text-xs bg-blue-50 text-blue-700 font-semibold px-2.5 py-1 rounded-full border border-blue-200">Disponibilidade Local</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-slate-100 text-slate-700 text-xs uppercase">
+                            <tr>
+                                <th class="p-3 rounded-l-lg">Vacina</th>
+                                <th class="p-3">Público Indicado</th>
+                                <th class="p-3">Situação do Estoque</th>
+                                <th class="p-3 rounded-r-lg">Horário de Atendimento</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-xs">
+                            <tr>
+                                <td class="p-3 font-semibold text-slate-800">Gripe / Influenza</td>
+                                <td class="p-3">População geral (a partir dos 6 meses)</td>
+                                <td class="p-3"><span class="badge-status badge-disponivel">Disponível</span></td>
+                                <td class="p-3 text-slate-600">08:00 às 17:00</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-slate-800">COVID-19 XBB</td>
+                                <td class="p-3">Grupos prioritários, gestantes e idosos</td>
+                                <td class="p-3"><span class="badge-status badge-alerta">Estoque Limitado</span></td>
+                                <td class="p-3 text-slate-600">08:00 às 16:30</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-slate-800">Dengue (Qdenga)</td>
+                                <td class="p-3">Crianças e adolescentes (10 a 14 anos)</td>
+                                <td class="p-3"><span class="badge-status badge-esgotado">Aguardando Remessa</span></td>
+                                <td class="p-3 text-slate-600">Previsão em breve</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- SELEÇÃO INICIAL DE TIPO DE ACESSO / LOGIN -->
+        <div id="secao-acesso-portal" class="hidden max-w-2xl mx-auto space-y-6 py-4">
+            <div class="text-center space-y-2">
+                <h2 class="text-2xl font-bold text-slate-900">Portal de Acesso Seguro</h2>
+                <p class="text-xs text-slate-600">Para garantir a segurança e a privacidade dos dados, escolha a sua categoria de usuário:</p>
+            </div>
+
+            <!-- OPÇÕES DE PERFIL DE LOGIN -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button onclick="selecionarPerfil('paciente')" class="perfil-card">
+                    <div class="p-3 bg-blue-100 text-blue-700 rounded-xl w-fit">
+                        <i data-lucide="user" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-sm">Paciente</h4>
+                        <p class="text-xs text-slate-500">Consulte seus agendamentos, exames e corpo médico do SUS.</p>
+                    </div>
+                </button>
+
+                <button onclick="selecionarPerfil('medico')" class="perfil-card">
+                    <div class="p-3 bg-indigo-100 text-indigo-700 rounded-xl w-fit">
+                        <i data-lucide="stethoscope" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-sm">Médico</h4>
+                        <p class="text-xs text-slate-500">Acesso à agenda de consultas, prontuários e históricos de pacientes.</p>
+                    </div>
+                </button>
+
+                <button onclick="selecionarPerfil('gestao-posto')" class="perfil-card">
+                    <div class="p-3 bg-emerald-100 text-emerald-700 rounded-xl w-fit">
+                        <i data-lucide="building-2" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-sm">Gestão do Posto</h4>
+                        <p class="text-xs text-slate-500">Gerenciamento da unidade, cadastro de usuários e fila de triagem.</p>
+                    </div>
+                </button>
+
+                <button onclick="selecionarPerfil('gestao-sus')" class="perfil-card">
+                    <div class="p-3 bg-purple-100 text-purple-700 rounded-xl w-fit">
+                        <i data-lucide="activity" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-sm">Gestão do SUS</h4>
+                        <p class="text-xs text-slate-500">Regulação municipal, acompanhamento de filas e equipe regional.</p>
+                    </div>
+                </button>
+            </div>
+
+            <!-- FORMULÁRIO DE LOGIN DINÂMICO -->
+            <div id="form-login-container" class="hidden bg-white p-6 rounded-2xl border border-slate-200 shadow-md space-y-4">
+                <div class="flex justify-between items-center border-b pb-3">
+                    <h3 id="form-login-titulo" class="font-bold text-slate-900 text-base">Identificação do Usuário</h3>
+                    <button onclick="resetarSelecaoPerfil()" class="text-xs text-blue-600 hover:underline">Trocar Perfil</button>
+                </div>
+
+                <form onsubmit="event.preventDefault(); processarLogin();" class="space-y-3">
+                    <div id="campos-login-dinamicos">
+                        <!-- Preenchido via JavaScript -->
+                    </div>
+                    <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2.5 rounded-lg text-sm transition">Entrar com Segurança</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- TELA 1: ÁREA DO PACIENTE (PÓS-LOGIN) -->
+        <section id="area-paciente" class="hidden space-y-6">
+            <div class="flex justify-between items-center bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <div class="flex items-center space-x-3">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80" alt="Foto do Paciente" class="w-10 h-10 rounded-full object-cover border border-blue-500">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">Bem-vindo(a), Maria das Dores Silva</h3>
+                        <p class="text-xs text-slate-500">Cartão SUS: 898 0001 2345 6789</p>
+                    </div>
+                </div>
+                <button onclick="sairSessao()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-2 rounded-lg">Sair do Portal</button>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="calendar" class="w-5 h-5 text-blue-600"></i> Meus Agendamentos
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/50 space-y-2">
+                        <span class="badge-status badge-disponivel">Consulta Agendada</span>
+                        <h4 class="font-bold text-slate-900 text-sm">Clínica Geral</h4>
+                        <p class="text-xs text-slate-600">Dr. Roberto Lima — UBS Parque Eldorado</p>
+                        <p class="text-xs text-blue-800 font-bold">15 de Novembro às 09:00</p>
+                    </div>
+                    <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/50 space-y-2">
+                        <span class="badge-status badge-alerta">Solicitação de Exame</span>
+                        <h4 class="font-bold text-slate-900 text-sm">Hemograma Completo</h4>
+                        <p class="text-xs text-slate-600">Laboratório Central SUS</p>
+                        <p class="text-xs text-amber-800 font-bold">Aguardando Confirmação</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Corpo Médico -->
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                <h3 class="text-base font-bold text-slate-900">Médicos Atendentes do SUS</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="border border-slate-200 p-4 rounded-xl space-y-2">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=150&auto=format&fit=crop&q=80" alt="Médico" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm">Dr. Roberto Lima</h4>
+                                <p class="text-xs text-blue-700 font-semibold">Clínico Geral</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-500">Atendimento comunitário e consultas de rotina na UBS Eldorado.</p>
+                    </div>
+
+                    <div class="border border-slate-200 p-4 rounded-xl space-y-2">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://images.unsplash.com/photo-1594824813566-88855ce78341?w=150&auto=format&fit=crop&q=80" alt="Médica" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm">Dra. Fernanda Alves</h4>
+                                <p class="text-xs text-pink-700 font-semibold">Pediatria</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-500">Acompanhamento do desenvolvimento infantil e prevenção de saúde.</p>
+                    </div>
+
+                    <div class="border border-slate-200 p-4 rounded-xl space-y-2">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=150&auto=format&fit=crop&q=80" alt="Médico" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm">Dr. André Santos</h4>
+                                <p class="text-xs text-indigo-700 font-semibold">Cardiologia Regional</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-500">Atendimento especializado mediante regulação municipal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TELA 2: ÁREA DO MÉDICO (PÓS-LOGIN) -->
+        <section id="area-medico" class="hidden space-y-6">
+            <div class="flex flex-wrap justify-between items-center gap-4 bg-blue-900 text-white p-4 rounded-xl shadow">
+                <div>
+                    <span id="badge-tipo-medico" class="text-xs text-blue-300 font-semibold uppercase tracking-wider">Médico Atendente</span>
+                    <h3 id="titulo-agenda-medico" class="text-lg font-bold">Agenda de Atendimentos</h3>
+                </div>
+                <button onclick="sairSessao()" class="bg-red-600 hover:bg-red-700 text-white text-xs font-semibold px-3 py-2 rounded-lg">Encerrar Sessão</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80" alt="Paciente" class="w-12 h-12 rounded-full object-cover border-2 border-blue-500">
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-sm">Maria das Dores Silva</h4>
+                            <p class="text-xs text-slate-500">CPF: 123.456.789-00 | 58 anos</p>
+                            <span class="badge-status badge-disponivel text-[10px]">08:30 - Confirmado</span>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 p-2.5 rounded-lg text-xs space-y-1">
+                        <p class="text-slate-700"><strong>Acompanhamento:</strong> Hipertensão arterial.</p>
+                    </div>
+                    <button onclick="abrirHistoricoPaciente('Maria das Dores Silva', '123.456.789-00')" class="w-full bg-blue-700 text-white text-xs py-1.5 rounded hover:bg-blue-800 font-medium">Acessar Prontuário Clínico</button>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" alt="Paciente" class="w-12 h-12 rounded-full object-cover border-2 border-blue-500">
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-sm">João Pedro Souza</h4>
+                            <p class="text-xs text-slate-500">CPF: 987.654.321-11 | 34 anos</p>
+                            <span class="badge-status badge-alerta text-[10px]">09:15 - Aguardando</span>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 p-2.5 rounded-lg text-xs space-y-1">
+                        <p class="text-slate-700"><strong>Acompanhamento:</strong> Avaliação de Raios-X.</p>
+                    </div>
+                    <button onclick="abrirHistoricoPaciente('João Pedro Souza', '987.654.321-11')" class="w-full bg-blue-700 text-white text-xs py-1.5 rounded hover:bg-blue-800 font-medium">Acessar Prontuário Clínico</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TELA 3: GESTÃO DO POSTO (PÓS-LOGIN) -->
+        <section id="area-gestao-posto" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-6">
+                <div class="flex justify-between items-center border-b pb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Gestão Local da UBS Parque Eldorado</h3>
+                        <p class="text-xs text-slate-500">Cadastro de usuários e organização da fila de atendimento local</p>
+                    </div>
+                    <button onclick="sairSessao()" class="bg-red-100 hover:bg-red-200 text-red-700 text-xs font-semibold px-3 py-1.5 rounded-lg">Encerrar Sessão</button>
+                </div>
+
+                <div class="flex flex-wrap gap-2 border-b pb-3 text-xs font-semibold">
+                    <button onclick="switchAbaPosto('requisicoes')" id="btn-posto-requisicoes" class="subnav-posto-btn active">Fila de Atendimento Local</button>
+                    <button onclick="switchAbaPosto('cad-medico')" id="btn-posto-cad-medico" class="subnav-posto-btn">Cadastrar Médico</button>
+                    <button onclick="switchAbaPosto('cad-paciente')" id="btn-posto-cad-paciente" class="subnav-posto-btn">Cadastrar Paciente</button>
+                </div>
+
+                <!-- Sub-aba 1: Fila Local por Gravidade -->
+                <div id="aba-posto-requisicoes" class="subaba-posto space-y-4">
+                    <h4 class="font-bold text-slate-800 text-sm">Fila de Atendimento do Postinho (Prioridade Clínica)</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left">
+                            <thead class="bg-slate-100 text-slate-700 uppercase">
+                                <tr>
+                                    <th class="p-2.5">Gravidade</th>
+                                    <th class="p-2.5">Paciente</th>
+                                    <th class="p-2.5">Tipo de Consulta</th>
+                                    <th class="p-2.5">Horário Chegada</th>
+                                    <th class="p-2.5">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr class="bg-red-50/40">
+                                    <td class="p-2.5"><span class="badge-status badge-esgotado font-bold">Urgente</span></td>
+                                    <td class="p-2.5 font-bold text-slate-900">Maria das Dores Silva</td>
+                                    <td class="p-2.5">Clínica Geral (Crise Hipertensiva)</td>
+                                    <td class="p-2.5 text-slate-500">07:45</td>
+                                    <td class="p-2.5"><button onclick="marcarAgendamentoLocal(this)" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-2.5 py-1 rounded text-[11px]">Marcar Agendamento</button></td>
+                                </tr>
+                                <tr class="bg-amber-50/30">
+                                    <td class="p-2.5"><span class="badge-status badge-alerta font-bold">Média</span></td>
+                                    <td class="p-2.5 font-bold text-slate-900">João Pedro Souza</td>
+                                    <td class="p-2.5">Avaliação de Raios-X de Coluna</td>
+                                    <td class="p-2.5 text-slate-500">08:10</td>
+                                    <td class="p-2.5"><button onclick="marcarAgendamentoLocal(this)" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-2.5 py-1 rounded text-[11px]">Marcar Agendamento</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Sub-aba 2: Cadastrar Médico -->
+                <div id="aba-posto-cad-medico" class="subaba-posto hidden space-y-4">
+                    <h4 class="font-bold text-slate-800 text-sm">Cadastrar Novo Médico</h4>
+                    <form onsubmit="event.preventDefault(); cadastrarMedico();" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <div>
+                            <label class="text-xs font-semibold text-slate-700">Nome Completo</label>
+                            <input id="cad-med-nome" type="text" required class="input-field" placeholder="Dr. Nome Sobrenome">
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold text-slate-700">CRM / Estado</label>
+                            <input id="cad-med-crm" type="text" required class="input-field" placeholder="00000-RS">
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold text-slate-700">Especialidade</label>
+                            <input id="cad-med-esp" type="text" required class="input-field" placeholder="Clínica Geral, Pediatria...">
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold text-slate-700">Unidade Atribuída</label>
+                            <input type="text" disabled value="UBS Parque Eldorado" class="input-field bg-slate-200">
+                        </div>
+                        <div class="md:col-span-2">
+                            <button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-4 py-2 rounded-lg text-xs">Salvar Cadastro de Médico</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Sub-aba 3: Cadastrar Paciente -->
+                <div id="aba-posto-cad-paciente" class="subaba-posto hidden space-y-4">
+                    <h4 class="font-bold text-slate-800 text-sm">Cadastrar Novo Paciente</h4>
+                    <form onsubmit="event.preventDefault(); cadastrarPaciente();" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <div>
+                            <label class="text-xs font-semibold text-slate-700">Nome do Cidadão</label>
+                            <input id="cad-pac-nome" type="text" required class="input-field" placeholder="Nome Completo">
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold text-slate-700">CPF</label>
+                            <input id="cad-pac-cpf" type="text" required class="input-field" placeholder="000.000.000-00">
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold text-slate-700">Cartão SUS</label>
+                            <input id="cad-pac-sus" type="text" required class="input-field" placeholder="898 0000 0000 0000">
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold text-slate-700">Telefone de Contato</label>
+                            <input id="cad-pac-tel" type="text" required class="input-field" placeholder="(51) 90000-0000">
+                        </div>
+                        <div class="md:col-span-2">
+                            <button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-4 py-2 rounded-lg text-xs">Salvar Cadastro de Paciente</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- TELA 4: GESTÃO DO SUS (PÓS-LOGIN) -->
+        <section id="area-gestao-sus" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-6">
+                <div class="flex justify-between items-center border-b pb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Central de Regulação Municipal do SUS</h3>
+                        <p class="text-xs text-slate-500">Monitoramento transparente da regulação e filas regionais</p>
+                    </div>
+                    <button onclick="sairSessao()" class="bg-red-100 hover:bg-red-200 text-red-700 text-xs font-semibold px-3 py-1.5 rounded-lg">Encerrar Sessão</button>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-bold text-slate-800 text-sm">Fila Regional por Especialidade Médica</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left">
+                            <thead class="bg-slate-100 text-slate-700 uppercase">
+                                <tr>
+                                    <th class="p-2.5">Prioridade</th>
+                                    <th class="p-2.5">Especialidade Solicitada</th>
+                                    <th class="p-2.5">Unidade Origem</th>
+                                    <th class="p-2.5">Tempo em Espera</th>
+                                    <th class="p-2.5">Ação de Regulação</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr>
+                                    <td class="p-2.5"><span class="badge-status badge-esgotado font-bold">Urgente</span></td>
+                                    <td class="p-2.5 font-medium">Cardiologia Geral</td>
+                                    <td class="p-2.5">UBS Parque Eldorado</td>
+                                    <td class="p-2.5">12 dias</td>
+                                    <td class="p-2.5"><button onclick="alert('Consulta autorizada e agendada na rede de regulação.')" class="bg-blue-700 hover:bg-blue-800 text-white px-2.5 py-1 rounded text-[11px]">Autorizar Vaga</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5"><span class="badge-status badge-alerta font-bold">Média</span></td>
+                                    <td class="p-2.5 font-medium">Oftalmologia</td>
+                                    <td class="p-2.5">UBS Centro</td>
+                                    <td class="p-2.5">28 dias</td>
+                                    <td class="p-2.5"><button onclick="alert('Consulta autorizada e agendada na rede de regulação.')" class="bg-blue-700 hover:bg-blue-800 text-white px-2.5 py-1 rounded text-[11px]">Autorizar Vaga</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL DE INFORMAÇÕES DAS CAMPANHAS DE SAÚDE -->
+    <div id="modal-campanha" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 max-w-lg w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-start border-b pb-3">
+                <div class="flex items-center space-x-3">
+                    <div id="campanha-icone-box" class="p-2.5 rounded-xl">
+                        <!-- Ícone dinâmico -->
+                    </div>
+                    <div>
+                        <h3 id="campanha-titulo" class="text-xl font-bold text-slate-900">Título da Campanha</h3>
+                        <p class="text-xs text-slate-500">Campanha Informativa de Prevenção</p>
+                    </div>
+                </div>
+                <button onclick="fecharModalCampanha()" class="text-slate-400 hover:text-slate-600">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3 text-xs leading-relaxed text-slate-700">
+                <div>
+                    <h4 class="font-bold text-slate-900 text-sm mb-1">Sobre a Causa</h4>
+                    <p id="campanha-causa">Descrição da causa.</p>
+                </div>
+
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                    <h4 class="font-bold text-slate-900 text-sm mb-1">Exames e Cuidados Recomendados</h4>
+                    <ul id="campanha-exames" class="list-disc list-inside space-y-1 text-slate-600">
+                        <!-- Lista dinâmica -->
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-900 text-sm mb-1">Como Buscar Atendimento na UBS</h4>
+                    <p id="campanha-atendimento">Instruções de atendimento na unidade.</p>
+                </div>
+            </div>
+
+            <div class="pt-2 border-t text-right">
+                <button onclick="fecharModalCampanha()" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-4 py-2 rounded-lg text-xs">Entendido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE PRONTUÁRIO MÉDICO -->
+    <div id="modal-prontuario" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 max-w-md w-full p-6 space-y-4">
+            <div class="flex justify-between items-center border-b pb-2">
+                <h3 class="font-bold text-slate-900 text-sm">Prontuário e Histórico do Paciente</h3>
+                <button onclick="fecharModalProntuario()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-4 h-4"></i></button>
+            </div>
+            <div class="space-y-2 text-xs">
+                <p><strong>Paciente:</strong> <span id="pront-nome"></span></p>
+                <p><strong>CPF:</strong> <span id="pront-cpf"></span></p>
+                <div class="bg-slate-50 p-3 rounded-lg border text-slate-600 space-y-1">
+                    <p>• 10/01/2026: Consulta de Rotina - PA 130x80 mmHg.</p>
+                    <p>• 15/08/2025: Exames Laboratoriais ok.</p>
+                </div>
+            </div>
+            <button onclick="fecharModalProntuario()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold py-2 rounded-lg">Fechar</button>
+        </div>
+    </div>
+
+    <!-- RODAPÉ -->
+    <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-xs py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-1">
+            <p>© 2026 UBS Parque Eldorado — Atendimento Humanizado ao Cidadão.</p>
+            <p class="text-slate-500">Desenvolvido com foco em segurança, clareza e acolhimento.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT JS EXTERNO -->
+    <script src="script.js"></script>
+</body>
+</html>
